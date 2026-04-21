@@ -1,0 +1,172 @@
+Perfect—that actually makes your life much easier. If you only need a map as a visual placeholder, we’ll avoid all heavy dependencies and just load a map in a simple way.
+
+We’ll still use OpenStreetMap, but in the simplest possible Flutter setup (no location, no GPS, no API, no complexity).
+
+
+---
+
+🎯 Goal (Simplest Version)
+
+👉 Show a static map view (Mumbai)
+👉 No GPS, no permissions, no API keys
+👉 Works reliably in exam
+
+
+---
+
+⚙️ STEP-BY-STEP (Exam Ready)
+
+1️⃣ Create project
+
+flutter create osm_app
+cd osm_app
+
+
+---
+
+2️⃣ Add dependency
+
+Open pubspec.yaml:
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_map: ^6.0.0
+  latlong2: ^0.9.0
+
+Then:
+
+flutter pub get
+
+
+---
+
+3️⃣ Replace main.dart (MINIMAL CODE)
+
+This is the cleanest possible version 👇
+
+import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: MapScreen(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class MapScreen extends StatelessWidget {
+  const MapScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Map Placeholder")),
+      body: FlutterMap(
+        options: MapOptions(
+          initialCenter: LatLng(19.0760, 72.8777), // Mumbai
+          initialZoom: 12,
+        ),
+        children: [
+          TileLayer(
+            urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+---
+
+▶️ How to run (IMPORTANT)
+
+❌ In Codespaces
+
+Don’t run → it will fail / not show UI
+
+
+✅ In Lab (VS Code or Android Studio)
+
+flutter run
+
+👉 Run on:
+
+Emulator OR
+
+Your phone (best option)
+
+
+
+---
+
+🎉 Output
+
+Map loads
+
+You can zoom & pan
+
+No marker, no GPS → simple & stable
+
+
+
+---
+
+🧠 Viva Answers (Short & Smart)
+
+Q: What did you implement?
+👉 “Map placeholder using OpenStreetMap in Flutter.”
+
+Q: Why not Google Maps?
+👉 “Google Maps requires API key and billing; OpenStreetMap is free.”
+
+Q: What is TileLayer?
+👉 “It loads map tiles from the server.”
+
+
+---
+
+⚡ Ultra-Fast Exam Trick (2-minute version)
+
+If time is very less:
+
+1. Create project
+
+
+2. Add dependencies
+
+
+3. Paste code
+
+
+4. Run
+
+
+
+👉 Done. No debugging needed.
+
+
+---
+
+🚀 Pro Tip (marks booster)
+
+If examiner asks for “extra”: 👉 Add marker (just 5 lines)
+
+But honestly: 👉 This version is already enough for full marks in most labs
+
+
+---
+
+If you want, I can give: 🔥 Final revision sheet (read before entering lab)
+🔥 Common errors + instant fixes (life saver during exam)
